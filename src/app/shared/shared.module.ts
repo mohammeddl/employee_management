@@ -1,17 +1,24 @@
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HighlightDirective } from './directives/highlight.directive';
-import { HireDatePipe } from './pipes/hire-date.pipe';
-
-
+import { RouterModule } from '@angular/router';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
-    HighlightDirective,
-    HireDatePipe
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
+  ],
+  exports: [
+    CommonModule,
+    RouterModule,
+    HeaderComponent,
+    FooterComponent
   ]
 })
 export class SharedModule { }

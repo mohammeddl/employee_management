@@ -1,11 +1,21 @@
+<!-- header.component.html -->
 <header class="header">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container">
-        <a class="navbar-brand" routerLink="/">Employee Management</a>
-        <div class="navbar-nav">
-          <a class="nav-link" routerLink="/employees" routerLinkActive="active">Employees</a>
-          <a class="nav-link" routerLink="/employees/add" routerLinkActive="active">Add Employee</a>
-        </div>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a class="logo" routerLink="/">
+        <span class="logo-icon">👥</span>
+        Employee Management
+      </a>
+      <div class="nav-links">
+        <a class="nav-link" routerLink="/employees" routerLinkActive="active">
+          <span class="link-icon">📋</span>
+          Employees
+        </a>
+        <a class="nav-link" routerLink="/employees/add" routerLinkActive="active">
+          <span class="link-icon">➕</span>
+          Add Employee
+        </a>
       </div>
-    </nav>
-  </header>
+    </div>
+  </nav>
+</header>

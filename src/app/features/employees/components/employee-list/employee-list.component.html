@@ -1,49 +1,57 @@
-<!-- src/app/features/employees/components/employee-list/employee-list.component.html -->
-<div class="employee-list-container">
-  <div class="header">
-    <h2>Employees</h2>
-    <button class="add-button" (click)="onAddEmployee()">Add Employee</button>
+<!-- employee-list.component.html -->
+<div class="list-container">
+  <div class="list-header">
+    <h2>Employee Directory</h2>
+    <button class="add-button" (click)="onAddEmployee()">
+      <span class="button-icon">+</span>
+      Add Employee
+    </button>
   </div>
 
-  <div class="table-container">
-    <table class="employee-table">
-      <thead>
-        <tr>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Email</th>
-          <th>Position</th>
-          <th>Department</th>
-          <th>Hire Date</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let employee of employees$ | async">
-          <td>{{ employee.firstName }}</td>
-          <td>{{ employee.lastName }}</td>
-          <td>{{ employee.email }}</td>
-          <td>{{ employee.position }}</td>
-          <td>{{ employee.department }}</td>
-          <td>{{ employee.hireDate | date : "mediumDate" }}</td>
-          <td class="actions">
-            <button class="edit-button" (click)="onEditEmployee(employee.id)">
-              Edit
-            </button>
-            <button
-              class="delete-button"
-              (click)="onDeleteEmployee(employee.id)"
-            >
-              Delete
-            </button>
-          </td>
-        </tr>
-        <tr *ngIf="(employees$ | async)?.length === 0">
-          <td colspan="7" class="empty-message">
-            No employees found. Click "Add Employee" to create one.
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="card-grid">
+    <div class="employee-card" *ngFor="let employee of employees$ | async">
+      <div class="card-header">
+        <div class="avatar">{{ employee.firstName[0] }}{{ employee.lastName[0] }}</div>
+        <div class="employee-info">
+          <h3>{{ employee.firstName }} {{ employee.lastName }}</h3>
+          <span class="position">{{ employee.position }}</span>
+        </div>
+      </div>
+      
+      <div class="card-content">
+        <div class="info-row">
+          <span class="icon">📧</span>
+          <span>{{ employee.email }}</span>
+        </div>
+        <div class="info-row" *ngIf="employee.phone">
+          <span class="icon">📱</span>
+          <span>{{ employee.phone }}</span>
+        </div>
+        <div class="info-row">
+          <span class="icon">🏢</span>
+          <span>{{ employee.department }}</span>
+        </div>
+        <div class="info-row">
+          <span class="icon">📅</span>
+          <span>{{ employee.hireDate | date:'mediumDate' }}</span>
+        </div>
+      </div>
+
+      <div class="card-actions">
+        <button class="action-button edit" (click)="onEditEmployee(employee.id)">
+          <span class="icon">✏️</span> Edit
+        </button>
+        <button class="action-button delete" (click)="onDeleteEmployee(employee.id)">
+          <span class="icon">🗑️</span> Delete
+        </button>
+      </div>
+    </div>
+
+    <div class="empty-state" *ngIf="(employees$ | async)?.length === 0">
+      <div class="empty-icon">👥</div>
+      <h3>No Employees Found</h3>
+      <p>Start by adding your first employee</p>
+      <button class="add-button" (click)="onAddEmployee()">Add Employee</button>
+    </div>
   </div>
 </div>

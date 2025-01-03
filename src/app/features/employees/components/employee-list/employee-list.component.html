@@ -1,1 +1,49 @@
-<p>employee-list works!</p>
+<!-- src/app/features/employees/components/employee-list/employee-list.component.html -->
+<div class="employee-list-container">
+  <div class="header">
+    <h2>Employees</h2>
+    <button class="add-button" (click)="onAddEmployee()">Add Employee</button>
+  </div>
+
+  <div class="table-container">
+    <table class="employee-table">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Position</th>
+          <th>Department</th>
+          <th>Hire Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees$ | async">
+          <td>{{ employee.firstName }}</td>
+          <td>{{ employee.lastName }}</td>
+          <td>{{ employee.email }}</td>
+          <td>{{ employee.position }}</td>
+          <td>{{ employee.department }}</td>
+          <td>{{ employee.hireDate | date : "mediumDate" }}</td>
+          <td class="actions">
+            <button class="edit-button" (click)="onEditEmployee(employee.id)">
+              Edit
+            </button>
+            <button
+              class="delete-button"
+              (click)="onDeleteEmployee(employee.id)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="(employees$ | async)?.length === 0">
+          <td colspan="7" class="empty-message">
+            No employees found. Click "Add Employee" to create one.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
